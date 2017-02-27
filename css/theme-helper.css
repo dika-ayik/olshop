@@ -1,0 +1,99 @@
+*{
+	font-family: 'Raleway',sans-serif;
+}
+html{height: 100%;}
+/*Overide Navbar */
+.navbar{
+	border-bottom: 3px solid #F24150;
+	box-shadow: 5px 2px 1px #b2b2b2;
+}
+.navbar-default .navbar-nav > li > a {
+  color: #777;
+  -webkit-transition: all .25s ease-in-out;
+}
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:focus {
+  color: white;
+  background-color: #F24150;
+  -webkit-transition: all .25s ease-in-out;
+}
+
+/*Override Style Dropdown*/
+.dropdown-menu > li > a:hover,
+.dropdown-menu > li > a:focus {
+  -webkit-transition: all .25s ease-in-out;
+  color: white;
+  text-decoration: none;
+  background-color: #F24150;
+}
+.navbar-default .navbar-nav > .open > a,
+.navbar-default .navbar-nav > .open > a:hover,
+.navbar-default .navbar-nav > .open > a:focus {
+  -webkit-transition: all .25s ease-in-out;
+  color: white;
+  background-color: #F24150;
+  cursor: pointer;
+}
+
+/*Override Panel-Danger*/
+.panel{
+	box-shadow: 2px 2px 2px 2px #b2b2b2;
+	border:1px solid #F24150;
+}
+.panel-danger > .panel-heading {
+  color: white;
+  background-color: #F24150;
+  border-color: #F24150;
+}
+
+
+
+/*Override Menu Category*/
+.nav-pills > li > a {
+  -webkit-transition: all .25s ease-in-out;
+  color: #F24150;
+  background-color: white ;
+}
+.nav-pills > li > a:hover,
+.nav-pills > li > a:focus {
+  -webkit-transition: all .25s ease-in-out;
+  color: white;
+  background-color: #F24150;
+}
+
+.footer{
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 1rem;
+  background-color: red;
+  text-align: center;
+  color: white;
+}
+.pull-left a{color: white;}
+.pull-left a:hover{cursor: pointer;}
+.pull-right a {color: white;}
+
+.btn-own{
+  background-color: #F24968;
+  border:2px solid #F24968;
+  color: white;
+  transition: all .25s ease-in;
+}
+.btn-own:hover{
+  transition: all .25s ease-out;
+  background-color: white;
+  color: #F24968;
+}
+.btn-back{
+  background-color: #6BB809;
+  border:2px solid #6BB809;
+  color: white;
+  transition: all .25s ease-in;
+}
+.btn-back:hover{
+  transition: all .25s ease-out;
+  background-color: white;
+  color: #6BB809;
+}
