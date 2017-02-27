@@ -210,7 +210,7 @@
 
     <!-- Morris Charts JavaScript -->
     <script src="js/morris.min.js"></script>
-    <script src="js/morris-data.js"></script>
+    <script src="js/data.js"></script>
     <script src="js/raphael.min.js"></script>
     <!-- Custom Theme JavaScript -->
     <script src="js/sb-admin-2.js"></script>

@@ -1,0 +1,68 @@
+Fitur Olshop Buku :
+
+- Tampilan buku (fixed)
+- Checkout (fixed)
+
+
+Fitur Admin Lte :
+
+- Dashboard (On-Going)
+- Data-Admin CRUD (Fixed)(Update System & Detail belum ditambahkan)
+- Data-Buku CRUD (fixed) (Update System & Detail belum ditambahkan)
+- Data Payment (Fixed)
+- About Page (Empty)
+
+Database name : kasir
+Table : - admin : -id
+                  -nama
+                  -username
+                  -password
+                  -cover
+                  -alamat
+
+        - barang : - id
+                   - nama 
+                   - harga
+                   - deskripsi
+                   - cover
+                   - genre
+
+        - payment : - id
+                    - id_pay
+                    - tgl
+                    - nama_barang
+                    - hrg_total
+                    - nama_pembeli
+                    - email
+                    - kode_pos
+                    - kota
+                    - no_telp
+                    - no_rek
+                    - nama_rek
+                    - bank
+                    - alamat
+
+
+Admin Pages :
+
+login.html 
+admin.php
+data_admin.php
+tables.php (Data-Buku)
+pembeli.php (Data-Payment)
+blank.php (About pages)
+paging_admin.php
+paging_pay.php
+navbar.php
+
+
+User Pages :
+
+index.html
+home.php
+detail.php
+navbar.php
+footer.php
+checkout.php
+proses.php
+paging.html
