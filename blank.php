@@ -1,4 +1,13 @@
+<?php
+session_start();
+if (empty($_SESSION['user'])) {
+    header("location:login.php");
+}else{
+    include "koneksi.php";
+}
 
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -35,6 +44,16 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <h1 class="page-header">About</h1>
+                        <div class="jumbotron">
+                            <h2>Online Shop</h2>
+                            <p><strong>Maded By :</strong><br>
+                            <i class="fa fa-star fa-stack"></i> 
+                            Mahardika Ari Pradana<br>
+                            <i class="fa fa-star fa-stack"></i>
+                            Bella Mardiyani Sadewi<br><br><br>
+                            Date Created : 20 Februari 2017<br>
+                             </p>
+                        </div>
                     </div>
                     <!-- /.col-lg-12 -->
                 </div>

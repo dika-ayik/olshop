@@ -1,4 +1,8 @@
 <?php 
+session_start();
+if (empty($_SESSION['user'])) {
+    header("location:login.php");
+}else{
 include "koneksi.php"; 
 if (isset($_POST['input'])) {
 	$uploaddir="img/"; //path
@@ -16,6 +20,7 @@ $res=mysqli_query($link , "INSERT INTO barang(id,nama,harga,deskripsi,cover,genr
 	header("location:tables.php");
 }else{
 	echo "failed";
+}
 }
 }
 ?>
