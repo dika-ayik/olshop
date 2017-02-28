@@ -1,3 +1,13 @@
+<?php
+session_start();
+if (empty($_SESSION['user'])) {
+    header("location:login.php");
+}else{
+    include "koneksi.php";
+}
+
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 

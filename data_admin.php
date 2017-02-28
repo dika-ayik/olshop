@@ -1,4 +1,8 @@
 <?php 
+session_start();
+if (empty($_SESSION['user'])) {
+    header("location:login.php");
+}else{
 include "koneksi.php"; 
 if (isset($_POST['input'])) {
 	$uploaddir="img_admin/"; //path
@@ -16,6 +20,7 @@ $res=mysqli_query($link , "INSERT INTO admin(id,nama,username,password,cover,ala
 	header("location:data_admin.php");
 }else{
 	echo "failed";
+}
 }
 }
 ?>
@@ -40,10 +45,10 @@ $res=mysqli_query($link , "INSERT INTO admin(id,nama,username,password,cover,ala
     <link href="css/sb-admin-2.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
-    <link href="font-awesome-4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="font-awesome-4.3.0/css/font-awesome.css" rel="stylesheet" type="text/css">
 
     <!-- Custom CSS -->
-    <link href="../dist/css/sb-admin-2.css" rel="stylesheet">
+    <link href="css/sb-admin-2.css" rel="stylesheet">
     <script>
             function tampilkanPreview(gambar,idpreview){
                 var gb = gambar.files;
@@ -182,11 +187,11 @@ $res=mysqli_query($link , "INSERT INTO admin(id,nama,username,password,cover,ala
                                         <td align="center"><?php echo $data['nama']; ?></td>
                                         <td align="center"><?php echo $data['alamat']; ?></td>
                                         <td align="center">
-                                            <a href="" class="btn btn-lg btn-default" onclick="return confirm ('Hapus'?');"title="Hapus">
-                                            <i class="glyphicon glyphicon-trash"></i>
+                                            <a href="" class="btn btn-lg btn-default">
+                                            <i class="fa fa-trash"></i>
                                             </a> 
                                             <a href="detail_admin.php" class="btn btn-lg btn-default">
-                                            <i class="glyphicon glyphicon-zoom-in"></i>
+                                            <i class="fa fa-eye"></i>
                                             </a>
                                         </td>
                                     </tr>
