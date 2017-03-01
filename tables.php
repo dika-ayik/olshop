@@ -226,7 +226,7 @@ $res=mysqli_query($link , "INSERT INTO barang(id,nama,harga,deskripsi,cover,genr
                                      <td align="center"><?php echo $no ++; ?></td>
                                      <td><?php echo $data['nama']; ?></td>
                                      <td align="center">
-                                     <a href="detail_barang.php" class="btn btn-default"><span class="fa fa-eye"></span></a>
+                                     <a href="detail_barang.php?id=<?php echo $data[0]; ?>" class="btn btn-default"><span class="fa fa-eye"></span></a>
                                      <a href="delete.php?id=<?php echo $data[0];?>" class="btn btn-danger">
                                          <i class="glyphicon glyphicon-trash"></i>
                                     </a> 

@@ -48,6 +48,8 @@ Admin Pages :
 login.html 
 admin.php
 data_admin.php
+detail_admin.php
+detail_barang.php
 tables.php (Data-Buku)
 pembeli.php (Data-Payment)
 blank.php (About pages)

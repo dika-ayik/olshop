@@ -190,7 +190,7 @@ $res=mysqli_query($link , "INSERT INTO admin(id,nama,username,password,cover,ala
                                             <a href="" class="btn btn-lg btn-default">
                                             <i class="fa fa-trash"></i>
                                             </a> 
-                                            <a href="detail_admin.php" class="btn btn-lg btn-default">
+                                            <a href="detail_admin.php?id=<?php echo $data[0];?>" class="btn btn-lg btn-default">
                                             <i class="fa fa-eye"></i>
                                             </a>
                                         </td>

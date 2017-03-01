@@ -5,7 +5,9 @@ if (empty($_SESSION['user'])) {
 }else{
     include "koneksi.php";
 }
-
+if (isset($_POST['export'])) {
+    header("location:export.php");
+}
 
 ?>
 <!DOCTYPE html>
@@ -74,6 +76,11 @@ if (empty($_SESSION['user'])) {
                             </span>
                         </div>
                     </form>
+                </div>
+                <div class="col-md-6">
+                <form action="pembeli.php" method="post">
+                 <button type="submit" name="export" class="btn btn-danger">Export Data</button>
+                </form>
                 </div>
                 </div><br>
                             <table width="100%" class="table table-bordered">
