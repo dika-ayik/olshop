@@ -80,6 +80,7 @@ if (isset($_POST['export'])) {
                 <div class="col-md-6">
                 <form action="pembeli.php" method="post">
                  <button type="submit" name="export" class="btn btn-danger">Export Data</button>
+                 <a href="laporan-barang.php" class="btn btn-danger">Export Data (PDF)</a>
                 </form>
                 </div>
                 </div><br>
@@ -99,13 +100,14 @@ if (isset($_POST['export'])) {
                                 </thead>
                                 <tbody>
                                 <?php
-                                $no=1 ;
+                                $no=0 ;
+                                $a=$no++;
                             while (($count < $rpp) && ($i < $tcount)) {
                                 mysqli_data_seek($result, $i);
                                 $data = mysqli_fetch_array($result);
                             ?>
                                     <tr>
-                                      <td align="center"><?php echo $data['id_pay'];  ?></td>
+                                      <td align="center"><?php echo $no++; ?></td>
                                       <td align="center"><?php echo $data['tgl'];  ?></td>
                                       <td align="center"><?php echo $data['nama_barang'];  ?></td>
                                       <td align="center"><?php echo $data['hrg_total'];  ?></td>

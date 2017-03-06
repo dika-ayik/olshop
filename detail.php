@@ -31,7 +31,7 @@ $row=mysqli_fetch_array($sql);
 </head>
 <body>
    <div class="container-fluid">
-    <?php include "navbar.php"; ?>
+    <?php include "navbar_home.php"; ?>
    </div><br><br><br><br><br>
    <div class="container" style="width: 650px;">
      <div class="panel panel-danger animated bounceInUp">
