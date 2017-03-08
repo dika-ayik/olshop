@@ -1,7 +1,7 @@
 <?php  
 require "fpdf/fpdf.php";
 //Fields Name position
-$pdf= new FPDF('L','cm','Legal'); ;
+$pdf= new FPDF('L','cm', array(25,25)); ;
 $pdf->AddPage();
 $pdf->SetFont('Arial','B',10);
 $pdf->Image('img/logo.png',1,1,2,2);                         
@@ -14,9 +14,9 @@ $pdf->SetX(3);
 $pdf->MultiCell(19.5,0.5,'JL. Bungur No. 130, Telpon : 0411400000',0,'L');
 $pdf->SetX(3);             
 $pdf->MultiCell(19.5,0.5,'website : www.bookstore.com email : bookstore@hotmail.com',0,'L');
-$pdf->Line(1,3.1,34.5,3.1);             
+$pdf->Line(1,3.1,24,3.1);             
 $pdf->SetLineWidth(0.1);             
-$pdf->Line(1,3.2,34.5,3.2);                         
+$pdf->Line(1,3.2,24,3.2);                         
 $pdf->SetLineWidth(0);
 $pdf->Ln();
 $pdf->SetFont('times','B',8);
