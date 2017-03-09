@@ -4,6 +4,7 @@ if (empty($_SESSION['user'])) {
     header("location:login.php");
 }else{
     include "koneksi.php";
+    include 'dbConfig.php';
 }
 if (isset($_POST['export'])) {
     header("location:export.php");
@@ -89,7 +90,6 @@ if (isset($_POST['export'])) {
                                     <tr>
                                         <th class="text-center">Id</th>
                                         <th class="text-center">Tanggal</th>
-                                        <th class="text-center">Nama Barang</th>
                                         <th class="text-center">Harga Total</th>
                                         <th class="text-center">Nama Pembeli</th>
                                         <th class="text-center">No. Rekening</th>
@@ -104,12 +104,13 @@ if (isset($_POST['export'])) {
                                 $a=$no++;
                             while (($count < $rpp) && ($i < $tcount)) {
                                 mysqli_data_seek($result, $i);
+
                                 $data = mysqli_fetch_array($result);
+
                             ?>
                                     <tr>
                                       <td align="center"><?php echo $no++; ?></td>
                                       <td align="center"><?php echo $data['tgl'];  ?></td>
-                                      <td align="center"><?php echo $data['nama_barang'];  ?></td>
                                       <td align="center"><?php echo $data['hrg_total'];  ?></td>
                                       <td align="center"><?php echo $data['nama_pembeli'];  ?></td>
                                       <td align="center"><?php echo $data['no_rek'];  ?></td>

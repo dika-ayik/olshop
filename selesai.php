@@ -30,17 +30,13 @@
 <body>
 <div class="container-fluid">
    <?php include "navbar_home.php"; ?>
-</div><br><br><br><br><br><br>
+</div><br><br><br><br><br><br><br><br>
     <div class="container">
          <div class="jumbotron animated slideInRight">
            <h1 class="animated fadeInUp">Terima kasih Anda sudah berbelanja di Toko Kami</h1>
-           <p class="animated fadeInUp">Silahkan Kirim / Transfer uang pembelian anda disini :<br>Nomor Rekening : <strong>09812-918201-827</strong><br>
-           Nama Rekening : <strong>Anonymous</strong> <br>
-           Dan barang akan kami kirimkan ke alamat yang sudah anda isi di form checkout
-           </p>
            <a href="home.php">Kembali ke halaman utama</a>
          </div>
-    </div><br><br>
+    </div><br><br><br><br><br><br><br>
     <?php include "footer.php"; ?>
 </body>
 </html>

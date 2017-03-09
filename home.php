@@ -1,4 +1,7 @@
-
+<?php
+// include database configuration file
+include 'dbConfig.php';
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -114,7 +117,7 @@
         <center>
           <div class="thumbnail">
           <img src="<?php echo $data['cover']; ?>" class="img-responsive" style="height: 150px;"><br>
-          <a href="detail.php?id=<?php echo $data['id']; ?>" class="btn btn-block btn-own">Beli</a>
+          <a href="cartAction.php?action=addToCart&id=<?php echo $data["id"]; ?>" class="btn btn-own">Add To Cart</a>
           </div>
         </center>
           </div>

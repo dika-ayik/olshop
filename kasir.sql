@@ -1,20 +1,20 @@
 -- phpMyAdmin SQL Dump
--- version 3.5.2
--- http://www.phpmyadmin.net
+-- version 4.6.6
+-- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Mar 06, 2017 at 06:34 AM
--- Server version: 5.5.25a
--- PHP Version: 5.4.4
+-- Host: localhost:3306
+-- Generation Time: Mar 09, 2017 at 09:13 AM
+-- Server version: 10.2.3-MariaDB-log
+-- PHP Version: 7.0.10
 
-SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
+/*!40101 SET NAMES utf8mb4 */;
 
 --
 -- Database: `kasir`
@@ -26,22 +26,21 @@ SET time_zone = "+00:00";
 -- Table structure for table `admin`
 --
 
-CREATE TABLE IF NOT EXISTS `admin` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `admin` (
+  `id` int(11) NOT NULL,
   `nama` varchar(255) NOT NULL,
   `username` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `cover` varchar(255) NOT NULL,
-  `alamat` varchar(255) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+  `alamat` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `admin`
 --
 
 INSERT INTO `admin` (`id`, `nama`, `username`, `password`, `cover`, `alamat`) VALUES
-(1, 'Bella', 'bellamaradewi@gmail.com', '12345', '', 'Lumajang');
+(1, 'Bella', 'bellamarsadewi@gmail.com', '12345', '', 'Lumajang');
 
 -- --------------------------------------------------------
 
@@ -49,29 +48,92 @@ INSERT INTO `admin` (`id`, `nama`, `username`, `password`, `cover`, `alamat`) VA
 -- Table structure for table `barang`
 --
 
-CREATE TABLE IF NOT EXISTS `barang` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `barang` (
+  `id` int(11) NOT NULL,
   `nama` varchar(255) NOT NULL,
-  `harga` varchar(255) NOT NULL,
+  `harga` float(10,2) NOT NULL,
   `deskripsi` text NOT NULL,
   `cover` varchar(255) NOT NULL,
-  `genre` varchar(255) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
+  `genre` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `barang`
 --
 
 INSERT INTO `barang` (`id`, `nama`, `harga`, `deskripsi`, `cover`, `genre`) VALUES
-(1, 'Photoshop Tutorial Handbook''s', '150000', 'Dengan Buku Ini , pembaca dapat mengasah kemampuannya dalam hal mengedit foto', 'img/cover.jpg', 'Multimedia'),
-(2, 'RPG Maker VX ACE Guide Book', '200000', 'Dengan Menggunakan panduan ini , pembaca dapat membuat game rpg dengan mudah', 'img/80656_f.jpg', 'Programming'),
-(3, 'Resep Masakan Dari Sabang sampai Merauke', '50000', 'Dengan Menggunakan ini , Pembaca bisa memasak dengan mudah dan cepat', 'img/ID_MP2012MTH09KRMTSM_B.jpg', 'Cooking'),
-(4, 'The Shadows', '400000', 'dengan menggunakan ini , pembaca dapat berpikir kreatif untuk menciptakan suatu usaha', 'img/4abb4cd46bdda76af852d8a1494ef83a.jpg', 'Biography'),
-(5, 'Tiny House Floor Plans', '240000', 'Dengan Menggunakan ini , pengguna dapat membuat berbagai desain rumah yang minimalis dan bergaya', 'img/tiny-house-floor-plans-front-cover.png', 'House Design'),
-(6, 'Shingeki No Kyojin Vol 3', '100000', 'Komik Ini menceritakan perjuangan seorang pemuda bernama Eren yang ingin menghabisi semua raksasa - raksasa yang sudah menghancurkan desa tempat tinggalnya', 'admin_lte/img/attack-on-titan-3-hajime-isayama-paperback-cover-art.jpg', 'Komik'),
-(7, 'Harry Potter and The Order of The Phoenix', '400000', 'Creator : J.K Rowling', 'img/4e2a019f6266f99ec6a1b0be961212c7.jpg', 'Novel'),
-(8, 'Love Me If You Dare', '200000', 'Written By : Toni Blake', 'img/LoveMeIfYouDareCHANGE.jpg', 'Novel');
+(1, 'Python Book', 30.00, 'Mempelajari Bahasa Python', 'img/cover.png', 'Programming'),
+(3, 'Habis Jadian Terbitlah Mantan', 6.00, '', 'img/252008-cover-mantan-.png', 'Novel');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `customers`
+--
+
+CREATE TABLE `customers` (
+  `id` int(11) NOT NULL,
+  `name` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `email` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `phone` varchar(15) COLLATE utf8_unicode_ci NOT NULL,
+  `address` text COLLATE utf8_unicode_ci NOT NULL,
+  `created` datetime NOT NULL,
+  `modified` datetime NOT NULL,
+  `status` enum('1','0') COLLATE utf8_unicode_ci NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `customers`
+--
+
+INSERT INTO `customers` (`id`, `name`, `email`, `phone`, `address`, `created`, `modified`, `status`) VALUES
+(1, 'Test User', 'testuser@gmail.com', '9999999999', 'New York, NY, USA', '2016-08-17 08:21:25', '2016-08-17 08:21:25', '1');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `orders`
+--
+
+CREATE TABLE `orders` (
+  `id` int(11) NOT NULL,
+  `customer_id` int(11) NOT NULL,
+  `total_price` float(10,2) NOT NULL,
+  `created` datetime NOT NULL,
+  `modified` datetime NOT NULL,
+  `status` enum('1','0') COLLATE utf8_unicode_ci NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`id`, `customer_id`, `total_price`, `created`, `modified`, `status`) VALUES
+(1, 1, 150.00, '2017-03-09 08:05:52', '2017-03-09 08:05:52', '1'),
+(2, 1, 78.00, '2017-03-09 08:12:52', '2017-03-09 08:12:52', '1');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `order_items`
+--
+
+CREATE TABLE `order_items` (
+  `id` int(11) NOT NULL,
+  `order_id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `quantity` int(5) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `order_items`
+--
+
+INSERT INTO `order_items` (`id`, `order_id`, `product_id`, `quantity`) VALUES
+(1, 1, 1, 5),
+(2, 2, 2, 3),
+(3, 2, 1, 2),
+(4, 1, 1, 12);
 
 -- --------------------------------------------------------
 
@@ -79,10 +141,9 @@ INSERT INTO `barang` (`id`, `nama`, `harga`, `deskripsi`, `cover`, `genre`) VALU
 -- Table structure for table `payment`
 --
 
-CREATE TABLE IF NOT EXISTS `payment` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `payment` (
+  `id` int(11) NOT NULL,
   `tgl` date NOT NULL,
-  `nama_barang` varchar(255) NOT NULL,
   `hrg_total` varchar(255) NOT NULL,
   `nama_pembeli` varchar(255) DEFAULT NULL,
   `email` varchar(255) NOT NULL,
@@ -92,19 +153,110 @@ CREATE TABLE IF NOT EXISTS `payment` (
   `no_rek` varchar(255) NOT NULL,
   `nama_rek` varchar(255) NOT NULL,
   `bank` varchar(255) NOT NULL,
-  `alamat` text NOT NULL,
-  `id_pay` varchar(255) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+  `alamat` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `payment`
 --
 
-INSERT INTO `payment` (`id`, `tgl`, `nama_barang`, `hrg_total`, `nama_pembeli`, `email`, `kode_pos`, `kota`, `no_telp`, `no_rek`, `nama_rek`, `bank`, `alamat`, `id_pay`) VALUES
-(1, '2017-02-18', 'The Shadows', '400000', 'dika', 'dika_ayik@gmail.com', '12121', 'Jember', '121124134', '1123123123123123', 'dika', 'Danamon', 'dika', ''),
-(2, '2017-02-20', 'RPG Maker VX ACE Guide Book', '200000', 'yofandi', 'yofandi@gamil.ocm', '13245', 'Lumajang', '08123456', '01972612', 'Yofandi', 'Bank Jabar', 'Yosowilangun', ''),
-(3, '0000-00-00', 'The Shadows', '400000', '9090', 'klkjhjh@nbnbhbh.com', '32415', 'nigbhghf', '0797865645', '0966-0564323-8686', 'uyihj', 'Mandiri', 'kl.lkjgjtguigkj bhghjfgvgh', '');
+INSERT INTO `payment` (`id`, `tgl`, `hrg_total`, `nama_pembeli`, `email`, `kode_pos`, `kota`, `no_telp`, `no_rek`, `nama_rek`, `bank`, `alamat`) VALUES
+(1, '2017-03-09', '360', 'dadad', 'dadada', 'dadad', 'dadadadad', '08916054198', '5019810984415', 'adadada', 'BCA', 'dadad');
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `admin`
+--
+ALTER TABLE `admin`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id` (`id`);
+
+--
+-- Indexes for table `barang`
+--
+ALTER TABLE `barang`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id` (`id`);
+
+--
+-- Indexes for table `customers`
+--
+ALTER TABLE `customers`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `orders`
+--
+ALTER TABLE `orders`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `customer_id` (`customer_id`);
+
+--
+-- Indexes for table `order_items`
+--
+ALTER TABLE `order_items`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `order_id` (`order_id`);
+
+--
+-- Indexes for table `payment`
+--
+ALTER TABLE `payment`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id` (`id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `admin`
+--
+ALTER TABLE `admin`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `barang`
+--
+ALTER TABLE `barang`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT for table `customers`
+--
+ALTER TABLE `customers`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `orders`
+--
+ALTER TABLE `orders`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT for table `order_items`
+--
+ALTER TABLE `order_items`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+--
+-- AUTO_INCREMENT for table `payment`
+--
+ALTER TABLE `payment`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `orders`
+--
+ALTER TABLE `orders`
+  ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customers` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `order_items`
+--
+ALTER TABLE `order_items`
+  ADD CONSTRAINT `order_items_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

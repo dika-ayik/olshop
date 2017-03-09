@@ -10,7 +10,7 @@
         $rpp = 12; // jumlah record per halaman
 
         $db_link = mysqli_connect('localhost', 'root', '', 'kasir'); // sesuaikan username dan password mysqli anda
-        $sql = "SELECT * FROM payment WHERE no_rek LIKE '%$q%'||id_pay LIKE '%$q%' ORDER BY id"; // query silahkan disesuaikan
+        $sql = "SELECT * FROM payment WHERE nama_pembeli LIKE '%$q%' ORDER BY id"; // query silahkan disesuaikan
         $result = mysqli_query($db_link, $sql); // eksekusi query
 
         $tcount = mysqli_num_rows($result); // jumlah total baris

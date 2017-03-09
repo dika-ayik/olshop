@@ -2,7 +2,7 @@ Fitur Olshop Buku :
 
 - Tampilan buku (fixed)
 - Checkout (fixed)
-
+- Add To Cart System (FIXED)
 
 Fitur Admin Lte :
 
@@ -10,6 +10,8 @@ Fitur Admin Lte :
 - Data-Admin CRUD (Fixed)(Update System & Detail belum ditambahkan)
 - Data-Buku CRUD (fixed) (Update System & Detail belum ditambahkan)
 - Data Payment (Fixed)
+- Export Report (xls & pdf)
+- Import Report (CSV)
 - About Page (Empty)
 
 Database name : kasir

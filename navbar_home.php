@@ -18,6 +18,8 @@
                 <div class="collapse navbar-collapse" id="mynavbar-content">
                 <div class="container-fluid">
                     <ul class="nav navbar-nav navbar-right">
+                        
+                        <li><a href="viewCart.php" class="cart-link" title="View Cart"><i class="glyphicon glyphicon-shopping-cart"></i></a></li>
                         <li><a href="home.php">Home</a></li>
                         <!--<li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown">Category <span class="caret"></span></a>

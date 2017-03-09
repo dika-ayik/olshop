@@ -1,59 +1,85 @@
 <?php
-      include "koneksi.php";
-      $tgl=date("Y-m-d");
-      $id=$_GET['id'];
-      $sql=mysqli_query($link,"SELECT * FROM barang where id='$id'");
-      $row=mysqli_fetch_array($sql);
-      $rand=rand(143651,134657890);
-    ?>
+// include database configuration file
+include 'dbConfig.php';
+
+// initializ shopping cart class
+include 'Cart.php';
+$cart = new Cart;
+
+// redirect to home if cart is empty
+if($cart->total_items() <= 0){
+    header("Location: home.php");
+}
+
+// set customer ID in session
+$_SESSION['sessCustomerID'] = 1;
+
+// get customer details by session customer ID
+$query = $db->query("SELECT * FROM customers WHERE id = ".$_SESSION['sessCustomerID']);
+$custRow = $query->fetch_assoc();
+?>
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
+    <title>Checkout - PHP Shopping Cart Tutorial</title>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Checkout</title>
-    <meta name="keywords" content="bootstrap themes, portfolio, responsive theme">
-    <meta name="author" content="ThemeForces.Com">
-    <link rel="stylesheet" type="text/css"  href="css/bootstrap.css">
-    <link rel="stylesheet" type="text/css" href="fonts/font-awesome/css/font-awesome.css">
-    <link rel="stylesheet" type="text/css" href="css/theme-helper.css">
-    <link rel="stylesheet" type="text/css" href="css/animate.css">
-    <script type="text/javascript" src="js/modernizr.custom.js"></script>
-    <link href='http://fonts.googleapis.com/css?family=Raleway:500,600,700,100,800,900,400,200,300' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=Playball' rel='stylesheet' type='text/css'>
-    <script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
-    <script>
-        $(document).ready(function(){
-           $(".dropdown").hover(            
-           function() {
-            $('.dropdown-menu', this).stop( true, true ).slideDown("fast");
-            $(this).toggleClass('open');        
-           },
-           function() {
-            $('.dropdown-menu', this).stop( true, true ).slideUp("fast");
-            $(this).toggleClass('open');       
-           }
-          );
-        });
-    </script>
-  </head>
-  <body>
-  <div class="container-fluid">
-  <?php include "navbar_home.php"; ?>
-  </div><br><br><br><br>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style>
+    .container{width: 100%;padding: 50px;}
+    .shipAddr{width: 30%;float: left;margin-left: 30px;}
+    .footBtn{width: 95%;float: left;}
+    .orderBtn {float: right;}
+    </style>
+</head>
+<body>
 <div class="container">
- <div class="row">
-  <div class="col-md-4 animated bounceInUp" style="border: 1px solid #ff5151;border-radius: 8px;">
-  <div class="title"><h3>Form Checkout</h3></div>
-<form method="post" action="proses.php">
-       <div class="form-group">
-       <label>Tanggal Pembelian</label><br>
-         <input type="hidden" disabled="" class="form-control" name="tgl" value="<?php echo $tgl; ?>"><?php echo $tgl; ?>
-       </div>
-       <div class="form-group">
-       <label>Id Pembelian</label><br>
-         <input type="hidden" disabled="" class="form-control" name="id_pay" value="<?php echo $rand; ?>"><?php echo $rand; ?>
-       </div>
+    <h1>Order Preview</h1>
+<div class="row">
+<div class="col-md-12">
+    <table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Product</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Subtotal</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php
+        if($cart->total_items() > 0){
+            //get cart items from session
+            $cartItems = $cart->contents();
+            foreach($cartItems as $item){
+        ?>
+        <tr>
+            <td><?php echo $item["name"]; ?></td>
+            <td><?php echo '$'.$item["price"].' USD'; ?></td>
+            <td><?php echo $item["qty"]; ?></td>
+            <td><?php echo '$'.$item["subtotal"].' USD'; ?></td>
+        </tr>
+        <?php } }else{ ?>
+        <tr><td colspan="4"><p>No items in your cart......</p></td>
+        <?php } ?>
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="3"></td>
+            <?php if($cart->total_items() > 0){ ?>
+            <td class="text-center"><strong>Total <?php echo '$'.$cart->total().' USD'; ?></strong></td>
+            <?php } ?>
+        </tr>
+    </tfoot>
+    </table>
+</div>
+</div>
+    <br>
+    <h1>Fill The Checkout Form</h1>
+    <form method="post" action="cartAction.php?action=placeOrder">
+    <div class="row">
+    <div class="col-md-6">
        <div class="form-group">
         <label for="nm_usr">Nama</label>
         <input name="nama_pembeli" type="text" class="form-control" id="nm_usr" size="100" />
@@ -74,6 +100,8 @@
         <label for="kota_usr">Kota</label>
         <input name="kota" type="text" class="form-control" id="kota_usr" size="100"/>
       </div>
+    </div>
+    <div class="col-md-6">
       <div class="form-group">
         <label for="tlp">No telepon</label>
         <input name="no_telp" type="text" class="form-control" id="tlp" size="100"/>
@@ -100,36 +128,13 @@
         <option value="Permata">Permata</option>
         </select>
       </div>
-      <div class="form-group">
-        <input type="submit" value="Simpan Data" name="finish" class="btn btn-block btn-own"/>
-      </div>
-    
-    </div>
-    <div class="col-md-offset-6">
-      <h1 class="text-right animated slideInRight">Silahkan Isi Form Checkout Untuk Melakukan Prosedur Transaksi</h1>
-      <h3 class="animated slideInRight">Barang yang akan anda pesan :</h3><br>
-      <div class="row">
-      <div class="col-md-4 animated slideInRight">
-      <img src="<?php echo $row['cover']; ?>" class="img-responsive" style="height: 250px;">
-      </div>
-      <div class="col-md-8 animated slideInRight">
-         <p style="font-size: 20px;">Nama Buku :</p><input type="hidden" value="<?php echo $row['nama']; ?>" name="nama"><strong><?php echo $row['nama']; ?></strong><br><br>
-         <p style="font-size: 20px;">Genre :</p> <input type="hidden" value="<?php echo $row['genre']; ?>" name=""><strong><?php echo $row['genre']; ?></strong><br><br>
-         <p style="font-size: 20px;">Harga Buku :</p> <input type="hidden" value="<?php echo $row['harga']; ?>" name="harga"><strong>Rp.<?php echo $row['harga']; ?>,00</strong><br><br>
-         <p style="font-size: 20px;">Deskripsi :</p> <input type="hidden" value="<?php echo $row['deskripsi']; ?>" name=""><strong><?php echo $row['deskripsi']; ?></strong><br><br>
-      </div>
       </div>
     </div>
-  </div>
+    <div class="footBtn">
+        <a href="home.php" class="btn btn-warning"><i class="glyphicon glyphicon-menu-left"></i> Continue Shopping</a>
+        <button type="submit" class="btn btn-success orderBtn">Place Order <i class="glyphicon glyphicon-menu-right"></i></button>
+    </div>
+    </form>
 </div>
-</form>
-<br><br>
-	</div>
-  <?php include "footer.php"; ?>
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
-    <script type="text/javascript" src="js/bootstrap.js"></script>
-    <script type="text/javascript" src="js/main.js"></script>
-  </body>
+</body>
 </html>
