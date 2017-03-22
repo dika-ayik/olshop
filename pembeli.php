@@ -82,7 +82,7 @@ if (isset($_POST['export'])) {
                 <form action="pembeli.php" method="post">
                  <button type="submit" name="export" class="btn btn-danger">Export Data</button>
                  <a href="laporan-barang.php" class="btn btn-danger">Export Data (PDF)</a>
-                 <a href="index.php" class="btn btn-danger">Import Data (CSV)</a>
+                 <a href="import.php" class="btn btn-danger">Import Data (CSV)</a>
                 </form>
                 </div>
                 </div><br>
