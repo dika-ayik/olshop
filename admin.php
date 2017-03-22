@@ -229,7 +229,16 @@ if (empty($_SESSION['user'])) {
         data: [{
             period: '2017',
             transaksi: <?php echo $numb; ?>,
-        }, ],
+        },{
+            period: '2018',
+            transaksi: 0,
+        },{
+            period: '2019',
+            transaksi:0,
+        },{
+            period: '2020',
+            transaksi: 0,
+        }],
         xkey: 'period',
         ykeys: ['transaksi'],
         labels: ['transaksi'],
