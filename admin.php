@@ -4,6 +4,7 @@ if (empty($_SESSION['user'])) {
     header("location:login.php");
 }else{
     include "koneksi.php";
+    include "data-chart.php";
 }
 
 
@@ -55,11 +56,11 @@ if (empty($_SESSION['user'])) {
                         <div class="panel-heading">
                             <div class="row">
                                 <div class="col-xs-3">
-                                    <i class="fa fa-comments fa-5x"></i>
+                                    <i class="fa fa-book fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
-                                    <div class="huge">26</div>
-                                    <div>New Comments!</div>
+                                    <div class="huge"><?php echo $num ; ?></div>
+                                    <div>Jumlah Buku</div>
                                 </div>
                             </div>
                         </div>
@@ -192,7 +193,7 @@ if (empty($_SESSION['user'])) {
                     <!-- /.panel -->
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <i class="fa fa-bar-chart-o fa-fw"></i> Donut Chart Example
+                            <i class="fa fa-bar-chart-o fa-fw"></i> Jumlah Buku Berdasarkan Genre
                         </div>
                         <div class="panel-body">
                             <div id="morris-donut-chart"></div>
@@ -220,7 +221,70 @@ if (empty($_SESSION['user'])) {
 
     <!-- Morris Charts JavaScript -->
     <script src="js/morris.min.js"></script>
-    <script src="js/data.js"></script>
+    <script type="text/javascript">
+        $(function() {
+
+    Morris.Area({
+        element: 'morris-area-chart',
+        data: [{
+            period: '2017',
+            transaksi: <?php echo $numb; ?>,
+        }, ],
+        xkey: 'period',
+        ykeys: ['transaksi'],
+        labels: ['transaksi'],
+        pointSize: 2,
+        hideHover: 'auto',
+        resize: true
+    });
+
+    Morris.Donut({
+        element: 'morris-donut-chart',
+        data: [
+        {
+            
+            label: "Programming",
+            value: <?php echo $hitung_1; ?>
+        },
+        {
+            
+            label: "Multimedia",
+            value: <?php echo $hitung_2; ?>
+        },
+        {
+            
+            label: "Bussiness",
+            value: <?php echo $hitung_3; ?>
+        },
+        {
+            
+            label: "Cooking",
+            value: <?php echo $hitung_4; ?>
+        }, 
+        {
+            label: "House Design",
+            value: <?php echo $hitung_5; ?>
+        }, 
+        {
+            label: "Sport",
+            value: <?php echo $hitung_6; ?>
+        },
+        {
+            label: "Biography",
+            value: <?php echo $hitung_7; ?>
+        },
+        {
+            label: "Novel",
+            value: <?php echo $hitung_8; ?>
+        },
+        {
+            label: "Comic",
+            value: <?php echo $hitung_9; ?>
+        }],
+        resize: true
+    });
+});
+    </script>
     <script src="js/raphael.min.js"></script>
     <!-- Custom Theme JavaScript -->
     <script src="js/sb-admin-2.js"></script>
